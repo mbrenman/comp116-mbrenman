@@ -17,7 +17,8 @@ end
 def checkAttacks(pkt)
     checkNetScans(pkt)
     checkLeakedPass(pkt)
-    if whichProto(pkt.tcp_sport, pkt.tcp_dport) == "HTTP"    
+    if whichProto(pkt.tcp_sport, pkt.tcp_dport) == "HTTP"
+        #Limit to info sent over HTTP    
         checkCreditCards(pkt)
         checkXSS(pkt)
     end
@@ -29,6 +30,7 @@ def checkLeakedPass(pkt)
     pass = false
     passes.each do |p|
         pbinary = p.each_byte.map { |b| sprintf(" 0x%02X ",b) }.join
+        #binary representations of passes
         if payload.include?(p) ||
            payload.include?(pbinary)
             pass = true
