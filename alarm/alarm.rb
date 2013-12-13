@@ -9,7 +9,9 @@ def sniff(iface)
     stream.stream.each do |p|
         pkt = PacketFu::Packet.parse p
         if pkt.proto.include?('TCP')
-            checkAttacks(pkt)
+            if pkt.ip_saddr == my_ip
+                checkAttacks(pkt)
+            end
         end 
     end
 end
