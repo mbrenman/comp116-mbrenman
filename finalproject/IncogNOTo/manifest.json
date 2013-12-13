@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "IncogNOTo",
+  "description": "This extension demonstrates how an extension can break the privacy barrier of Incognito mode.",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["track.js"]
+    }
+  ],
+
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "lock.png",
+    "default_popup": "popup.html"
+  }
+}
